@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+
+body {
+  @apply bg-orange-100;
+}
+
+.wrapper {
+  @apply max-w-[1200px] mx-auto;
+}
+
+.section-title {
+  @apply text-[24px] font-semibold text-center my-[16px];
+}
+
+.section-border {
+  @apply border border-orange-200 rounded p-2;
+}
