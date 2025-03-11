@@ -7,8 +7,17 @@
         terapii bólu. Każda terapia jest dostosowana indywidualnie do Twoich potrzeb, aby zapewnić
         skuteczne i trwałe efekty.
       </p>
-      <p class="font-semibold my-[12px] text-[18px]">Zakres usług</p>
-      <OfferCardComponent v-for="(card, index) in offerCards" :key="index" :card="card" />
+
+      <p class="font-semibold my-[12px] text-[18px] text-center">Zakres usług</p>
+      <div class="cards grid grid-cols-1 gap-[16px] w-[60%] mx-auto">
+        <OfferCardComponent
+          v-for="(card, index) in offerCards"
+          :key="index"
+          :card="card"
+          :cardIndex="index"
+        />
+      </div>
+      <RegisterButtonComponent class="flex items-center justify-center" />
     </div>
   </section>
 </template>
@@ -17,32 +26,34 @@
 import { ref } from 'vue'
 import type { OfferCard } from '@/types/types'
 import OfferCardComponent from './OfferCardComponent.vue'
+import { Bandage, Bike, Cross, Dumbbell, Hand } from 'lucide-vue-next'
+import RegisterButtonComponent from './RegisterButtonComponent.vue'
 
 const offerCards = ref<OfferCard[]>([
   {
     title: 'Terapia manualna',
-    icon: 'Hand',
+    icon: Hand,
     description: 'Terapia manualna',
   },
   {
     title: 'Rehabilitacja pourazowa',
-    icon: 'Bike',
-    description: 'powrót do sprawności po kontuzjach i operacjach',
+    icon: Bike,
+    description: 'Powrót do sprawności po kontuzjach i operacjach',
   },
   {
     title: 'Masaż leczniczy',
-    icon: 'Cross',
-    description: 'ulga w bólu i poprawa krążenia',
+    icon: Cross,
+    description: 'Ulga w bólu i poprawa krążenia',
   },
   {
     title: 'Kinesiotaping',
-    icon: 'Bandage',
-    description: 'wsparcie dla mięśni i stawów',
+    icon: Bandage,
+    description: 'Wsparcie dla mięśni i stawów',
   },
   {
     title: 'Ćwiczenia rehabilitacyjne',
-    icon: 'Dumbell',
-    description: 'indywidualne plany terapii ruchowej',
+    icon: Dumbbell,
+    description: 'Indywidualne plany terapii ruchowej',
   },
 ])
 </script>

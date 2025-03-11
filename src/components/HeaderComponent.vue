@@ -8,16 +8,14 @@
           mobilność i wracać do pełnej sprawności. Umów wizytę i zadbaj o swoje zdrowie już dziś!
         </p>
 
-        <button
-          class="my-[32px] bg-orange-400 text-black font-semibold px-4 py-2 rounded justify-self-end"
-        >
-          Umów wizyte
-        </button>
+        <RegisterButtonComponent />
       </div>
     </div>
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RegisterButtonComponent from './RegisterButtonComponent.vue'
+</script>
 
 <style scoped></style>

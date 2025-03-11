@@ -16,15 +16,23 @@
       </div>
     </div>
   </nav>
-  <MobileNavComponent :isActive="isMenuActive" />
+  <MobileNavComponent :isActive="isMenuActive" @closeMenu="isMenuActive = false" />
 </template>
 
 <script setup lang="ts">
 import { House, Menu } from 'lucide-vue-next'
 import MobileNavComponent from './MobileNavComponent.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const isMenuActive = ref(false)
+
+onMounted(() => {
+  const body = document.querySelector('body')
+
+  body?.addEventListener('scroll', () => {
+    console.log('scroll')
+  })
+})
 </script>
 
 <style scoped></style>

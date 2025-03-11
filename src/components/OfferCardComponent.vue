@@ -1,10 +1,12 @@
 <template>
-  <div>Lorem, ipsum dolor.{{ card.icon }}</div>
-  <Bandage v-if="card.icon === 'Bandage'" />
-  <Bike v-if="card.icon === 'Bike'" />
-  <Cross v-if="card.icon === 'Cross'" />
-  <Dumbbell v-if="card.icon === 'Dumbell'" />
-  <Hand v-if="card.icon === 'Hand'" />
+  <div
+    class="flex flex-col gap-[12px] items-center border border-orange-200 rounded-2xl p-2"
+    :class="{ 'bg-orange-200': cardIndex % 2 === 0 }"
+  >
+    <p class="text-center">{{ card.title }}</p>
+    <component :is="iconsMap[index]" v-if="iconsMap[index]" class="w-[50px] h-[60px]" />
+    <p class="text-center">{{ card.description }}</p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,9 +15,11 @@ import { Bandage, Bike, Cross, Dumbbell, Hand } from 'lucide-vue-next'
 
 const props = defineProps<{
   card: OfferCard
+  cardIndex: number
 }>()
 
-console.log(props.card)
+const iconsMap = [Bandage, Bike, Cross, Dumbbell, Hand]
+const index = iconsMap.indexOf(props.card.icon)
 </script>
 
 <style scoped></style>
