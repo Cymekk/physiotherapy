@@ -22,17 +22,9 @@
 <script setup lang="ts">
 import { House, Menu } from 'lucide-vue-next'
 import MobileNavComponent from './MobileNavComponent.vue'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const isMenuActive = ref(false)
-
-onMounted(() => {
-  const body = document.querySelector('body')
-
-  body?.addEventListener('scroll', () => {
-    console.log('scroll')
-  })
-})
 </script>
 
 <style scoped></style>

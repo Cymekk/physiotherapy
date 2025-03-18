@@ -7,8 +7,10 @@ export interface OfferCard {
 }
 
 export interface Profile {
-  id: number
-  email: string
+  id?: number
   name: string | null
   surname: string | null
+  email?: string | null
+  userID?: string | null
+  phoneNumber: number | null
 }
