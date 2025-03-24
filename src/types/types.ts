@@ -14,3 +14,20 @@ export interface Profile {
   userID?: string | null
   phoneNumber: number | null
 }
+
+export interface LoginForm {
+  email: string
+  password: string
+}
+
+export interface RegisterForm {
+  email: string
+  password: string
+  repeatedPassword: string
+}
+
+export interface ProfileDetails {
+  name: string
+  surname: string
+  phoneNumber: number | string
+}

@@ -1,4 +1,4 @@
-import type { Profile } from './../types/types'
+import type { LoginForm, Profile, ProfileDetails, RegisterForm } from './../types/types'
 import { defineStore } from 'pinia'
 import { supabase } from '@/lib/supabaseClient.js'
 import { useRouter } from 'vue-router'
@@ -9,11 +9,11 @@ export const useProfilesStore = defineStore('profiles', () => {
   const user = ref<Profile>()
   const isProfileLoaded = ref(true)
 
-  const registerUser = async (email: string, password: string) => {
+  const registerUser = async (credentials: RegisterForm) => {
     try {
       const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
+        email: credentials.email,
+        password: credentials.password,
       })
       if (error) throw error
       insertData(data.user.email, data.user.id)
@@ -24,15 +24,25 @@ export const useProfilesStore = defineStore('profiles', () => {
     }
   }
 
-  const loginUser = async (email: string, password: string) => {
+  const loginUser = async (credentials: LoginForm) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: credentials.email,
+        password: credentials.password,
       })
-      if (error) throw error
+      if (error) throw 'Nieprawny login lub hasło'
       router.push({ name: 'profile' })
       getDataByID(data.user.id)
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const logoutUser = async () => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      if (error) throw error
+      router.push({ name: 'home' })
     } catch (error) {
       console.log(error)
     }
@@ -47,7 +57,7 @@ export const useProfilesStore = defineStore('profiles', () => {
     }
   }
 
-  const updateProfileData = async (userDetails: Profile) => {
+  const updateProfileData = async (userDetails: Profile | ProfileDetails) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -79,5 +89,13 @@ export const useProfilesStore = defineStore('profiles', () => {
     }
   }
 
-  return { registerUser, loginUser, getDataByID, user, isProfileLoaded, updateProfileData }
+  return {
+    registerUser,
+    loginUser,
+    getDataByID,
+    user,
+    isProfileLoaded,
+    updateProfileData,
+    logoutUser,
+  }
 })
